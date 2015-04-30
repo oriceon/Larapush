@@ -18,7 +18,7 @@ abstract class LarapushConnection {
 	{
 		$context = \App::make('ZMQContext');
 
-		$this->socket = $context->getSocket(\ZMQ::SOCKET_PUSH, \Config::get('larapush::persistent_socket_name'));
+		$this->socket = $context->getSocket(\ZMQ::SOCKET_PUSH, \Config::get('larapush.persistent_socket_name'));
 		$this->socket->connect($this->getPusherConnect());
 
 		return $this->socket;
@@ -40,7 +40,7 @@ abstract class LarapushConnection {
 	 */
 	protected function getPusherConnect()
 	{
-		return \Config::get('larapush::zmqConnect') . ':' . \Config::get('larapush::zmqPort');
+		return \Config::get('larapush.zmqConnect') . ':' . \Config::get('larapush.zmqPort');
 	}
 
 }

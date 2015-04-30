@@ -47,17 +47,17 @@ class LarapushServer {
 		$context = new ZMQContext($loop);
 		
 		// Waiting for ZeroMQ messages from server-side
-		$pull = $context->getSocket(\ZMQ::SOCKET_PULL, \Config::get('larapush::pers_socket_name'));
-		$pull->bind(\Config::get('larapush::zmqConnect') . ':' . \Config::get('larapush::zmqPort'));
+		$pull = $context->getSocket(\ZMQ::SOCKET_PULL, \Config::get('larapush.pers_socket_name'));
+		$pull->bind(\Config::get('larapush.zmqConnect') . ':' . \Config::get('larapush.zmqPort'));
 
 		// On message, execute pushMessageToServer($message) in LarapushBroadcaster
 		$pull->on('message', [$this->broadcaster, 'pushMessageToServer']);
 
 		// WebSocket server for CLIENTS waiting for real-time updates
 		$webSocket = new SocketServer($loop);
-		$webSocket->listen($port, \Config::get('larapush::socketConnect'));
+		$webSocket->listen($port, \Config::get('larapush.socketConnect'));
 
-		$webServer = 	new IoServer(
+		$webServer = new IoServer(
 							new HttpServer(
 								new WsServer(
 									new WampServer(
@@ -68,7 +68,7 @@ class LarapushServer {
 									)
 								)
 							), $webSocket
-					 	);
+						);
 
 		$loop->run();
 	}

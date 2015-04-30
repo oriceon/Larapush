@@ -64,7 +64,7 @@ class LarapushServeCommand extends Command {
 	protected function getOptions()
 	{
 		return [
-			['port', 'p', InputOption::VALUE_OPTIONAL, 'The Port on which we listen for new connections', \Config::get('larapush::socketPort')],
+			['port', 'p', InputOption::VALUE_OPTIONAL, 'The Port on which we listen for new connections', \Config::get('larapush.socketPort')],
 		];
 	}
 

@@ -26,7 +26,9 @@ class LarapushServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('redbaron76/larapush');
+		$this->publishes([
+			__DIR__ . '/../../config/config.php' => config_path('larapush.php'),
+		], 'config');
 
 		// Register Event Subscriber
 		// $this->app->register('Redbaron76\Larapush\Providers\EventServiceProvider');
@@ -40,7 +42,7 @@ class LarapushServiceProvider extends ServiceProvider {
 		$this->app->booting(function()
 		{
 			$this->aliasLoader->alias('Larapush', 'Redbaron76\Larapush\Support\Facades\Larapush');
-		});	
+		});
 	}
 
 	/**
